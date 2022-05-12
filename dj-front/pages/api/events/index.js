@@ -9,3 +9,5 @@ export default (req, res) => {
     res.status(405).json({ message: `Method ${req.method} is not allowed` })
   }
 }
+
+ 
