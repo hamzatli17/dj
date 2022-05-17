@@ -1,19 +1,19 @@
+import Link from 'next/link'
 import Layout from '@/components/Layout'
 import EventItem from '@/components/EventItem'
 import { API_URL } from '@/config/index'
-import Link from 'next/link'
 
 export default function HomePage({ events }) {
   return (
     <Layout>
       <h1>Upcoming Events</h1>
-      <h1>Events</h1>
       {events.length === 0 && <h3>No events to show</h3>}
 
       {events.map((evt) => (
         <EventItem key={evt.id} evt={evt} />
       ))}
-       {events.length > 0 && (
+
+      {events.length > 0 && (
         <Link href='/events'>
           <a className='btn-secondary'>View All Events</a>
         </Link>
@@ -23,11 +23,19 @@ export default function HomePage({ events }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch(`${API_URL}/api/events`)
-  const events = await res.json()
+  const qs = require('qs');
+const query = qs.stringify({
+  populate: '*', 
+}, {
+  encodeValuesOnly: true,
+});
 
+  const res = await fetch(`${API_URL}/api/events?${query}`)
+  const eve = await res.json()
+const events =eve.data
+console.log(events[0].attributes.image.data.attributes)
   return {
-    props: { events : events.slice(0,3) },
+    props: { events},
     revalidate: 1,
   }
 }
