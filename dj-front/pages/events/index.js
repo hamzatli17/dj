@@ -18,9 +18,16 @@ export default function EventsPage({ events }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch(`${API_URL}/api/events`)
+  const qs = require('qs');
+const query = qs.stringify({
+  populate: '*', 
+}, {
+  encodeValuesOnly: true,
+});
+
+  const res = await fetch(`${API_URL}/api/events?${query}`)
   const eve = await res.json()
-const events = eve.data
+const events =eve.data
   return {
     props: { events },
     revalidate: 1,
