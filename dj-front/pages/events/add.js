@@ -52,7 +52,7 @@ export default function AddEventPage() {
       toast.error('Something Went Wrong')
     } else {
       const eve = await res.json()
-      router.push(`/events/${eve.slug}`)
+      router.push(`/events/${eve.data.attributes.slug}`)
     }
   }
   const handleInputChange = (e) => {
