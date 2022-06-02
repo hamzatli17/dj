@@ -23,8 +23,7 @@ export default function AddEventPage() {
   const router = useRouter()
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(values)
-    console.log('hi bou7miz',JSON.stringify({data:{attributes:values}}) )
+  
      // Validation
      const hasEmptyFields = Object.values(values).some(
       (element) => element === ''
@@ -44,8 +43,7 @@ export default function AddEventPage() {
       }, */
      // credentials: 'include',
       body: JSON.stringify({data:values})  
-    })
-    console.log(res)
+    }) 
     if (!res.ok) {
    //   if (res.status === 403 || res.status === 401) {
   //      toast.error('No token included')
@@ -54,8 +52,7 @@ export default function AddEventPage() {
       toast.error('Something Went Wrong')
     } else {
       const eve = await res.json()
-      const evt =eve.data
-      router.push(`/events/${evt.slug}`)
+      router.push(`/events/${eve.slug}`)
     }
   }
   const handleInputChange = (e) => {
