@@ -35,7 +35,6 @@ export const AuthProvider = ({ children }) => {
 
   // Login user
   const login = async ({ email: identifier, password }) => {
-    console.log('fuuuuuck')
     const res = await fetch(`${API_URL}/api/auth/local`, {
       method: 'POST',
       headers: {
